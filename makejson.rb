@@ -58,16 +58,17 @@ jpegfiles = ARGV.grep /\.jpg/i
     sleep 1
 
     page = {}
-    page['title'] = sprintf("%s%03d", prefix, i)
+    title_format = '%s,%03d'
+    page['title'] = sprintf(title_format, prefix, i)
     lines = []
     page['lines'] = lines
     lines << page['title']
     if i == 0
-      line1 = "[#{sprintf('%s,%03d', prefix, 0)}]  [#{sprintf('%s,%03d', prefix, 1)}]"
+      line1 = "[#{sprintf(title_format, prefix, 0)}]  [#{sprintf(title_format, prefix, 1)}]"
     elsif i == jpegfiles.length - 1
-      line1 = "[#{sprintf('%s,%03d', prefix, i - 1)}]  [#{sprintf('%s,%03d', prefix, i)}]"
+      line1 = "[#{sprintf(title_format, prefix, i - 1)}]  [#{sprintf(title_format, prefix, i)}]"
     else
-      line1 = "[#{sprintf('%s,%03d', prefix, i-1)}]  [#{sprintf('%s,%03d', prefix, i + 1)}]"
+      line1 = "[#{sprintf(title_format, prefix, i - 1)}]  [#{sprintf(title_format, prefix, i + 1)}]"
     end
 
     lines << "[[#{s3url} #{gyazourl}]]"
