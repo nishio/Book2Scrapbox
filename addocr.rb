@@ -41,11 +41,14 @@ origdata['pages'].each { |page|
   if gyazoid && !ocr_done
     lines << ""
     lines << "(OCR text)"
-    res = gyazo.image image_id: gyazoid
-    if res && res[:ocr]
-      res[:ocr][:description].split(/\n/).each { |line|
-        lines << "> #{line}"
-      }
+    begin
+      res = gyazo.image image_id: gyazoid
+      if res && res[:ocr]
+        res[:ocr][:description].split(/\n/).each { |line|
+          lines << "> #{line}"
+        }
+      end
+    rescue
     end
   end
 
